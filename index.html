@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StreamER &mdash; Movie Recommendations (Static)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ TOP NAV ============ -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <div class="logo">STREAM<span>FLIX</span></div>
+
+      <div class="search-wrap">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search a movie you like..."
+          autocomplete="off"
+        />
+        <div id="searchResults" class="search-results hidden"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO (featured movie) ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Trending #1 Today</p>
+      <h1 class="hero-title" id="heroTitle">Loading...</h1>
+      <p class="hero-overview" id="heroOverview"></p>
+      <div class="hero-meta">
+        <span class="badge badge-rating" id="heroRating">&#9733; --</span>
+        <span id="heroGenres" class="hero-genres"></span>
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="heroRecommendBtn">
+          &#9654; Find Similar Movies
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ "BECAUSE YOU LIKED X" RESULTS ROW ============ -->
+  <section class="row-section hidden" id="recommendSection">
+    <h2 class="row-title" id="recommendTitle">Because you liked ...</h2>
+    <div class="card-row" id="recommendRow"></div>
+  </section>
+
+  <!-- ============ GENRE ROWS (populated by JS) ============ -->
+  <main id="genreRows"></main>
+
+  <footer class="footer">
+    <p>Static site \u2014 no server. Data pre-computed once with TF-IDF + cosine similarity (see scripts/build_recommendations.py). Poster images &copy; their respective studios, served live from TMDB.</p>
+  </footer>
+
+  <!-- Reusable card template used by JS to render every poster card -->
+  <template id="cardTemplate">
+    <div class="card">
+      <div class="card-art">
+        <span class="card-watermark"></span>
+        <span class="match-badge hidden"></span>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-top">
+          <span class="card-title"></span>
+          <span class="card-rating">&#9733; <span></span></span>
+        </div>
+        <p class="card-overview"></p>
+        <div class="card-genres"></div>
+        <button class="btn btn-small btn-similar">Find Similar</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>

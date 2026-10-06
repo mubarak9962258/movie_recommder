@@ -1,0 +1,351 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   Color:  bg-void #0a0a0f | bg-surface #16161f | accent #e50914
+           text-primary #f5f5f2 | text-secondary #9b9ba6 | gold #f5c518
+   Type:   display = "Bebas Neue" (condensed, cinematic, used sparingly
+           for the logo + hero title) | body/UI = "Inter"
+   ========================================================================== */
+
+:root {
+  --bg-void: #0a0a0f;
+  --bg-surface: #16161f;
+  --bg-surface-2: #1e1e29;
+  --accent: #e50914;
+  --accent-dim: #7a0d13;
+  --text-primary: #f5f5f2;
+  --text-secondary: #9b9ba6;
+  --gold: #f5c518;
+  --radius: 6px;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ============ NAVBAR ============ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 4vw;
+  background: linear-gradient(to bottom, rgba(10,10,15,0.95), transparent);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+.logo span { color: var(--accent); }
+
+.search-wrap {
+  position: relative;
+  width: min(420px, 45vw);
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 16px;
+  background: rgba(22,22,31,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.search-input:focus {
+  border-color: var(--accent);
+  background: rgba(22,22,31,1);
+}
+.search-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: var(--bg-surface);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+  max-height: 340px;
+  overflow-y: auto;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+}
+
+.search-result-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.search-result-item:hover { background: var(--bg-surface-2); }
+.search-result-item small { color: var(--text-secondary); }
+
+.hidden { display: none !important; }
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 4vw 6vw;
+  background: radial-gradient(ellipse at 30% 20%, #2a0e12 0%, var(--bg-void) 62%);
+  overflow: hidden;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--bg-void) 5%, transparent 55%),
+              linear-gradient(to right, rgba(10,10,15,0.85) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-content { position: relative; max-width: 640px; z-index: 2; }
+
+.hero-eyebrow {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 7vw, 84px);
+  line-height: 0.95;
+  margin: 0 0 18px;
+  letter-spacing: 0.5px;
+}
+
+.hero-overview {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+  max-width: 54ch;
+}
+
+.hero-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+
+.badge-rating {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.hero-genres { color: var(--text-secondary); font-size: 14px; }
+
+.hero-actions .btn { font-size: 16px; padding: 13px 28px; }
+
+/* ============ BUTTONS ============ */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+.btn:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover { background: #ff1620; transform: translateY(-1px); }
+
+.btn-small {
+  width: 100%;
+  padding: 8px 0;
+  font-size: 13px;
+  background: var(--text-primary);
+  color: var(--bg-void);
+  margin-top: 10px;
+}
+.btn-small:hover { background: var(--gold); }
+
+/* ============ ROWS OF CARDS ============ */
+.row-section { padding: 0 4vw 34px; }
+
+.row-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+.card-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+}
+.card-row::-webkit-scrollbar { height: 8px; }
+.card-row::-webkit-scrollbar-thumb { background: var(--bg-surface-2); border-radius: 8px; }
+
+/* ============ CARD ============
+   Signature element: since this dataset has no real poster images,
+   each card renders an abstract "poster" made from its primary
+   genre's gradient + a giant faded initial letter watermark, rather
+   than a generic gray placeholder box. */
+.card {
+  position: relative;
+  flex: 0 0 220px;
+  height: 300px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, z-index 0s;
+}
+
+.card-art {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* When a card has a real TMDB poster, hide the generated letter
+   watermark -- the photo itself is the visual now. */
+.card-art.has-poster .card-watermark { display: none; }
+
+.card-watermark {
+  position: absolute;
+  top: -0.15em;
+  right: -0.05em;
+  font-family: var(--font-display);
+  font-size: 180px;
+  line-height: 1;
+  color: rgba(255,255,255,0.14);
+  pointer-events: none;
+  user-select: none;
+}
+
+.match-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.55);
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5,5,8,0.97) 0%, rgba(5,5,8,0.75) 45%, transparent 100%);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: scale(1.06);
+  z-index: 5;
+  box-shadow: 0 18px 36px rgba(0,0,0,0.55);
+}
+.card:hover .card-overlay,
+.card:focus-within .card-overlay { opacity: 1; }
+
+.card-overlay-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 14.5px;
+  line-height: 1.25;
+}
+
+.card-rating { color: var(--gold); font-size: 12px; font-weight: 700; white-space: nowrap; }
+
+.card-overview {
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  line-height: 1.45;
+  margin: 6px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+.card-genres span {
+  font-size: 10px;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  padding: 2px 6px;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  padding: 40px 4vw 60px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 20px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 640px) {
+  .search-wrap { width: 100%; }
+  .navbar-inner { flex-wrap: wrap; }
+  .logo { font-size: 22px; }
+  .card { flex-basis: 150px; height: 220px; }
+  .card-watermark { font-size: 110px; }
+  .hero { min-height: 64vh; padding-bottom: 40px; }
+}
